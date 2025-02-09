@@ -28,7 +28,7 @@ Ensure you have the following installed:
 1. Capture network traffic using **Wireshark** and save it as a `.pcap` file.
 2. Run the script with the PCAP file as input:
    ```bash
-   python network_analyzer.py <path_to_pcap_file>
+   python network_analyzer.py <path_to_pcap_file> <port_number>
    ```
 3. The script will:
    - Process and analyze the packets
