@@ -43,7 +43,10 @@ Ensure you have the following installed:
 - **Packet size distribution graph**
 
 ## Screenshots
-(Include relevant screenshots of the output and visualizations.)
+![packet_size_distribution](https://github.com/user-attachments/assets/59a8c63f-a475-497a-9671-3e5a34b800e2)
+![protocol_distribution](https://github.com/user-attachments/assets/0213f0a8-5aba-403c-bd87-b2bc6c2a3115)
+![top_destination_ports](https://github.com/user-attachments/assets/c8912192-3511-4d0d-9221-fdf3019e7e8f)
+![top_source_ips](https://github.com/user-attachments/assets/69ea70a3-5504-47b5-83f2-76ee88582f2c)
 
 ## Limitations
 - Requires Wireshark to capture live traffic.
