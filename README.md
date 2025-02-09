@@ -56,12 +56,5 @@ Ensure you have the following installed:
 - **Detecting unauthorized network activity**
 - **Identifying potential security threats**
 
-## Contributing
-Contributions are welcome! Feel free to open issues or submit pull requests.
 
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contact
-For any questions or support, reach out to [your contact info].
 
