@@ -12,16 +12,10 @@ from tqdm import tqdm
 logging.basicConfig(level=logging.INFO, format='%(message)s')
 logger = logging.getLogger(__name__)
 
-# List of commonly abused ports by malware
 MALICIOUS_PORTS = {4444, 5555, 6667, 8080, 9001, 4443}
 
 def read_pcap(pcap_file):
-    """
-    Reads a PCAP file and returns a list of packets.
     
-    :param pcap_file: Path to the PCAP file.
-    :return: List of packets.
-    """
     try:
         packets = rdpcap(pcap_file)
         logger.info(f"Loaded {len(packets)} packets from {pcap_file}")
@@ -34,12 +28,7 @@ def read_pcap(pcap_file):
     return packets
 
 def extract_packet_data(packets):
-    """
-    Extracts relevant data from each packet.
     
-    :param packets: List of packets.
-    :return: DataFrame containing extracted packet data.
-    """
     packet_data = []
     for packet in tqdm(packets, desc="Processing packets", unit="packet"):
         if IP in packet:
@@ -53,7 +42,7 @@ def extract_packet_data(packets):
             elif UDP in packet:
                 dst_port = packet[UDP].dport
             timestamp = packet.time
-            # Check for failed TCP connection (using RST flag)
+
             failed_conn = TCP in packet and packet[TCP].flags == 0x04
             packet_data.append({
                 "src_ip": src_ip,
@@ -69,12 +58,7 @@ def extract_packet_data(packets):
     return df
 
 def analyze_packet_data(df):
-    """
-    Performs basic analysis on the packet data.
-    
-    :param df: DataFrame of packet data.
-    :return: Total bandwidth and protocol counts.
-    """
+
     total_bandwidth = df["size"].sum()
     protocol_counts = df["protocol"].value_counts()
     avg_packet_size = df["size"].mean()
@@ -85,12 +69,7 @@ def analyze_packet_data(df):
     return total_bandwidth, protocol_counts
 
 def analyze_network_graph(df):
-    """
-    Constructs and analyzes a network graph from IP communications.
     
-    :param df: DataFrame of packet data.
-    :return: Graph and degree centrality of nodes.
-    """
     G = nx.Graph()
     for _, row in df.iterrows():
         G.add_edge(row["src_ip"], row["dst_ip"])
@@ -116,14 +95,7 @@ def save_or_show(fig, filename, output_dir):
         plt.show()
 
 def visualize_suspicious_activity(df, protocol_counts, total_bandwidth, output_dir=None):
-    """
-    Generates several visualizations to detect suspicious network activity.
     
-    :param df: DataFrame of packet data.
-    :param protocol_counts: Series of protocol counts.
-    :param total_bandwidth: Total bandwidth used.
-    :param output_dir: Optional directory to save figures.
-    """
     sns.set_style("darkgrid")
     
     # Traffic Spikes Detection (Line Plot)
